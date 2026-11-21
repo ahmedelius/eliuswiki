@@ -2,19 +2,25 @@
 set -euo pipefail
 
 # Publish EliusWiki to GitHub Pages.
-# Usage: ./publish.sh <github-username> [repository-name]
+# Usage: ./publish.sh <github-username> [repository-name] [https|ssh]
 #
-# Creates an empty repository on github.com first, then run this script.
-# Example: ./publish.sh ielius eliuswiki
+# Create an empty repository on github.com first, then run this script.
+# Example: ./publish.sh ielius eliuswiki ssh
 
 if [ "$#" -lt 1 ]; then
-  echo "Usage: $0 <github-username> [repository-name]" >&2
+  echo "Usage: $0 <github-username> [repository-name] [https|ssh]" >&2
   exit 1
 fi
 
 user="$1"
 repo="${2:-eliuswiki}"
-url="https://github.com/${user}/${repo}.git"
+proto="${3:-https}"
+
+if [ "$proto" = "ssh" ]; then
+  url="git@github.com:${user}/${repo}.git"
+else
+  url="https://github.com/${user}/${repo}.git"
+fi
 
 cd "$(dirname "$0")"
 

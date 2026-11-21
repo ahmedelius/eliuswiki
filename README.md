@@ -62,6 +62,21 @@ After registering:
 2. Enable HTTPS.
 3. Keep the `CNAME` file if you deploy with GitHub Pages; other hosts use their own domain settings.
 
+## GitHub tooling on this machine
+
+- `git` 2.56.0, with global identity `Elius <ahmedelius34@gmail.com>` and `main` as the default branch.
+- `gh` CLI 2.105.0 at `~/.local/bin/gh`, plus bash completion at `~/.local/share/bash-completion/completions/gh`.
+- An ed25519 SSH key at `~/.ssh/id_ed25519` (public key: `~/.ssh/id_ed25519.pub`) and `~/.ssh/config` for `github.com`.
+
+Before pushing, authenticate GitHub:
+
+```bash
+gh auth login
+gh auth setup-git
+```
+
+Add the contents of `~/.ssh/id_ed25519.pub` to **GitHub → Settings → SSH and GPG keys** if you want to push over SSH.
+
 ## Deploy
 
 ### GitHub Pages (recommended)
@@ -69,7 +84,7 @@ After registering:
 The repo already contains a workflow at `.github/workflows/deploy.yml`, so a push to `main` builds and deploys the site automatically.
 
 1. Create an empty repository on GitHub, for example `eliuswiki` (do **not** add a README or `.gitignore`).
-2. Connect it and push (or run `./publish.sh <your-username> eliuswiki`, which does this for you):
+2. Connect it and push (or run `./publish.sh <your-username> eliuswiki`, which does this for you; add `ssh` as a third argument to push over SSH):
 
    ```bash
    cd ~/eliuswiki
