@@ -64,12 +64,33 @@ After registering:
 
 ## Deploy
 
-### GitHub Pages
+### GitHub Pages (recommended)
 
-1. Create a repository and push this folder.
-2. In **Settings → Pages**, choose **Deploy from a branch** and select `main` / root.
-3. The included `CNAME` file sets the custom domain to `elius.wiki`.
-4. Enable **Enforce HTTPS** once DNS is configured.
+The repo already contains a workflow at `.github/workflows/deploy.yml`, so a push to `main` builds and deploys the site automatically.
+
+1. Create an empty repository on GitHub, for example `eliuswiki` (do **not** add a README or `.gitignore`).
+2. Connect it and push:
+
+   ```bash
+   cd ~/eliuswiki
+   git remote add origin https://github.com/<your-username>/eliuswiki.git
+   git push -u origin main
+   ```
+
+3. In the repository, go to **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The workflow runs on the next push (or use **Run workflow**).
+4. Still in **Pages**, add the custom domain `elius.wiki` under **Custom domain**, then tick **Enforce HTTPS** once DNS resolves.
+5. At your registrar, point the apex domain at GitHub with these A records:
+
+   ```text
+   185.199.108.153
+   185.199.109.153
+   185.199.110.153
+   185.199.111.153
+   ```
+
+   Optional: add `CNAME  www  <your-username>.github.io` for the `www` subdomain.
+
+The committed `CNAME` file already declares `elius.wiki`; adding the domain in the Pages settings just makes GitHub wire up the certificate and redirects. `.nojekyll` is included for the alternative **Deploy from a branch → main / root** method if you prefer that instead of Actions.
 
 ### Cloudflare Pages, Netlify, or Vercel
 
