@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EliusWiki — EliusWiki</title>
+  <meta name="description" content="EliusWiki is a personal encyclopedia about Elius, built as a fast static site with plain HTML, CSS, and JavaScript.">
+  <link rel="canonical" href="https://elius.wiki/wiki/eliuswiki.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="EliusWiki">
+  <meta property="og:title" content="EliusWiki — EliusWiki">
+  <meta property="og:description" content="Purpose, design, technical notes, and how to contribute to EliusWiki.">
+  <meta property="og:url" content="https://elius.wiki/wiki/eliuswiki.html">
+  <meta property="og:image" content="https://elius.wiki/assets/img/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EliusWiki — EliusWiki">
+  <meta name="twitter:description" content="About the personal encyclopedia of Elius.">
+  <meta name="twitter:image" content="https://elius.wiki/assets/img/og.png">
+  <meta name="theme-color" content="#f5f1e8">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../site.webmanifest">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("eliuswiki-theme");
+        if (!theme) theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (error) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/wiki.css">
+  <script src="../assets/js/search-index.js" defer></script>
+  <script src="../assets/js/wiki.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="EliusWiki home">
+        <span class="brand-mark" aria-hidden="true">E<span class="brand-dot"></span></span>
+        <span class="brand-text">
+          <span class="brand-name">EliusWiki</span>
+          <span class="brand-tag">The personal encyclopedia</span>
+        </span>
+      </a>
+
+      <div class="header-search" data-search>
+        <form class="search-box" role="search" data-search-form>
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-3.5-3.5"></path>
+          </svg>
+          <label class="sr-only" for="header-search">Search EliusWiki</label>
+          <input id="header-search" type="search" role="combobox" aria-haspopup="listbox" name="q" placeholder="Search EliusWiki" autocomplete="off" data-search-input aria-controls="header-search-results" aria-expanded="false">
+          <kbd class="search-kbd">Ctrl K</kbd>
+        </form>
+        <div class="search-results" id="header-search-results" data-search-results hidden></div>
+      </div>
+
+      <div class="header-actions">
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.5 6.5 0 0 0 21 12.8Z"></path>
+          </svg>
+        </button>
+        <button class="icon-button menu-button" type="button" data-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <section class="sidebar-section">
+        <p class="sidebar-title">Navigation</p>
+        <nav aria-label="Wiki navigation">
+          <a href="../index.html">Main page</a>
+          <a href="all.html">All articles</a>
+          <a href="all.html" data-random>Random article</a>
+          <a href="eliuswiki.html#recent">Recent changes</a>
+        </nav>
+      </section>
+
+      <section class="sidebar-section">
+        <p class="sidebar-title">About</p>
+        <nav aria-label="About EliusWiki">
+          <a href="elius.html">Elius</a>
+          <a href="eliuswiki.html" aria-current="page">EliusWiki</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </section>
+
+      <section class="sidebar-section">
+        <p class="sidebar-title">Tools</p>
+        <nav aria-label="Wiki tools">
+          <button type="button" data-copy-link>Copy page link</button>
+          <a href="mailto:ahmedelius34@gmail.com?subject=Edit%3A%20EliusWiki">Edit this page</a>
+          <a href="#contributing">Contribute</a>
+        </nav>
+      </section>
+
+      <section class="sidebar-section sidebar-note">
+        <p>EliusWiki is a static site with no trackers, accounts, or database. It is designed to be read and corrected.</p>
+      </section>
+    </aside>
+
+    <main class="content" id="main">
+      <article class="article">
+        <header class="article-header rise">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">Main page</a>
+            <span aria-hidden="true">/</span>
+            <span>EliusWiki</span>
+          </nav>
+          <h1 class="article-title">EliusWiki</h1>
+          <p class="article-subtitle">From EliusWiki, the personal encyclopedia</p>
+          <div class="article-meta">
+            <span>Last edited 21 November 2026</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span>4 min read</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span>1 contributor</span>
+          </div>
+          <nav class="wiki-tabs" aria-label="Article actions">
+            <a href="eliuswiki.html" aria-current="page">Article</a>
+            <a href="mailto:ahmedelius34@gmail.com?subject=Talk%3A%20EliusWiki">Talk</a>
+            <a href="eliuswiki.html">Read</a>
+            <a href="mailto:ahmedelius34@gmail.com?subject=Edit%3A%20EliusWiki">Edit</a>
+            <a href="#references">References</a>
+          </nav>
+        </header>
+
+        <div class="article-layout">
+          <div class="article-body">
+            <p class="lead">EliusWiki is a personal encyclopedia about <a href="elius.html">Elius</a>. It is built as a static website with plain HTML, CSS, and JavaScript, and is designed to be fast, readable, and easy to maintain.</p>
+
+            <aside class="toc" aria-labelledby="toc-title">
+              <p class="toc-title" id="toc-title">Contents</p>
+              <ol>
+                <li><a href="#purpose">Purpose</a></li>
+                <li><a href="#design">Design</a></li>
+                <li><a href="#technical-notes">Technical notes</a></li>
+                <li><a href="#contributing">Contributing</a></li>
+                <li><a href="#recent">Recent changes</a></li>
+                <li><a href="#domain">Domain and hosting</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </aside>
+
+            <h2 id="purpose">Purpose</h2>
+            <p>Most personal information online is scattered across profiles, captions, and messages. EliusWiki gives that information a stable address and a structure: a lead section, a few clear headings, and references for the facts that can be checked.</p>
+            <p>The wiki is not intended to be a complete biography. It is a public notebook with encyclopedia manners — small enough to read in one sitting, structured enough to grow.</p>
+
+            <h2 id="design">Design</h2>
+            <p>The visual language is paper and ink: a warm neutral background, a serif for headings, a sans-serif for body text, and a single cobalt blue for links. A vermilion accent marks the details that matter — the logo dot, the active tab, and the open sections.</p>
+            <p>The layout follows a familiar wiki pattern: a persistent sidebar, an article header with tabs, a table of contents, an infobox, and references. It is responsive, supports a dark theme, and keeps the reading column narrow enough to be comfortable.</p>
+
+            <h2 id="technical-notes">Technical notes</h2>
+            <p>The site is entirely static. There is no build step, no framework, and no database. The pages are hand-written HTML; <code>assets/css/wiki.css</code> holds the design system; <code>assets/js/wiki.js</code> adds search, theme switching, the mobile menu, and table-of-contents highlighting.</p>
+            <p>Search is client-side. The index lives in <code>assets/js/search-index.js</code> and is small enough to load with the page. The site can be hosted on GitHub Pages, Cloudflare Pages, Netlify, Vercel, or any static file server.</p>
+
+            <h2 id="contributing">Contributing</h2>
+            <p>Corrections, additions, and project entries are welcome by email. Send a short note with the page you are correcting and, where possible, a link that supports the change.</p>
+            <div class="callout callout-accent">
+              <h3>How to submit a change</h3>
+              <p>Email <a href="mailto:ahmedelius34@gmail.com?subject=EliusWiki%20edit">ahmedelius34@gmail.com</a> with the subject “EliusWiki edit”. Include the page name, the exact change, and a source if one exists.</p>
+            </div>
+
+            <h2 id="recent">Recent changes</h2>
+            <ul>
+              <li><strong>21 November 2026:</strong> EliusWiki created with the home page, the Elius article, this article, a projects page, a contact page, and an article index.</li>
+              <li><strong>21 November 2026:</strong> Added client-side search, dark mode, print styles, and a responsive sidebar.</li>
+              <li><strong>21 November 2026:</strong> Set the intended canonical domain to <strong>elius.wiki</strong>.</li>
+            </ul>
+
+            <h2 id="domain">Domain and hosting</h2>
+            <p>The intended canonical domain is <strong>elius.wiki</strong>. At the time of the build, a public RDAP lookup returned no registration record for the name, which suggests it may be available; availability should be confirmed with a registrar before purchase.</p>
+            <p>The project includes a <code>CNAME</code> file for GitHub Pages and is ready for any static host. Once the domain is registered, point it at the host and enable HTTPS. The canonical URLs, sitemap, and Open Graph metadata already use <code>https://elius.wiki</code>.</p>
+
+            <h2 id="references">References</h2>
+            <ol class="references">
+              <li id="ref-1">EliusWiki project files, including <code>index.html</code>, <code>assets/css/wiki.css</code>, and <code>assets/js/wiki.js</code> (21 November 2026).</li>
+              <li id="ref-2">Public contact email: <a href="mailto:ahmedelius34@gmail.com">ahmedelius34@gmail.com</a>.</li>
+            </ol>
+          </div>
+
+          <aside class="infobox" aria-label="Quick facts about EliusWiki">
+            <div class="infobox-title">EliusWiki</div>
+            <div class="infobox-mark" aria-hidden="true">E</div>
+            <dl>
+              <dt>Type</dt>
+              <dd>Personal encyclopedia</dd>
+
+              <dt>Owner</dt>
+              <dd><a href="elius.html">Elius</a></dd>
+
+              <dt>Domain</dt>
+              <dd>elius.wiki</dd>
+
+              <dt>Launched</dt>
+              <dd>21 November 2026</dd>
+
+              <dt>Stack</dt>
+              <dd>HTML, CSS, JavaScript</dd>
+
+              <dt>Status</dt>
+              <dd>Active</dd>
+            </dl>
+          </aside>
+        </div>
+
+        <footer class="article-footer">
+          <div class="category-tags" aria-label="Categories">
+            <a class="tag" href="all.html">Personal wikis</a>
+            <a class="tag" href="all.html">Websites</a>
+            <a class="tag" href="elius.html">Elius</a>
+          </div>
+          <button class="copy-link" type="button" data-copy-link>Copy link</button>
+        </footer>
+      </article>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="EliusWiki home">
+          <span class="brand-mark" aria-hidden="true">E<span class="brand-dot"></span></span>
+          <span class="brand-text">
+            <span class="brand-name">EliusWiki</span>
+            <span class="brand-tag">The personal encyclopedia</span>
+          </span>
+        </a>
+        <p>A personal encyclopedia about Elius. Built to be read, corrected, and kept.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Wiki">
+        <h2>Wiki</h2>
+        <a href="../index.html">Main page</a>
+        <a href="all.html">All articles</a>
+        <a href="elius.html">Elius</a>
+        <a href="eliuswiki.html">About EliusWiki</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Contact">
+        <h2>Contact</h2>
+        <a href="https://www.instagram.com/ielius_/" rel="me noopener">Instagram — @ielius_</a>
+        <a href="mailto:ahmedelius34@gmail.com">ahmedelius34@gmail.com</a>
+        <a href="contact.html">Contact page</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> EliusWiki. Text is maintained by Elius.</span>
+      <span>Canonical domain: elius.wiki · Built with plain HTML, CSS, and JavaScript.</span>
+    </div>
+  </footer>
+</body>
+</html>
