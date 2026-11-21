@@ -69,7 +69,7 @@ After registering:
 The repo already contains a workflow at `.github/workflows/deploy.yml`, so a push to `main` builds and deploys the site automatically.
 
 1. Create an empty repository on GitHub, for example `eliuswiki` (do **not** add a README or `.gitignore`).
-2. Connect it and push:
+2. Connect it and push (or run `./publish.sh <your-username> eliuswiki`, which does this for you):
 
    ```bash
    cd ~/eliuswiki
