@@ -34,5 +34,6 @@ git push -u origin main
 
 echo ""
 echo "Pushed to $url"
-echo "Next: GitHub repo Settings -> Pages -> Source: GitHub Actions"
-echo "Then: Custom domain elius.wiki, and DNS A records to GitHub Pages."
+echo "GitHub Pages deploys main / root automatically."
+echo "Staging: https://ahmedelius.github.io/eliuswiki/"
+echo "Remaining: point elius.wiki DNS at GitHub, then enforce HTTPS."

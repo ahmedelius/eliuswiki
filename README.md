@@ -79,22 +79,15 @@ Add the contents of `~/.ssh/id_ed25519.pub` to **GitHub → Settings → SSH and
 
 ## Deploy
 
-### GitHub Pages (recommended)
+### GitHub Pages (live)
 
-The repo already contains a workflow at `.github/workflows/deploy.yml`, so a push to `main` builds and deploys the site automatically.
+The site is published from `main` / root at **https://github.com/ahmedelius/eliuswiki**. Every push to `main` rebuilds it automatically.
 
-1. Create an empty repository on GitHub, for example `eliuswiki` (do **not** add a README or `.gitignore`).
-2. Connect it and push (or run `./publish.sh <your-username> eliuswiki`, which does this for you; add `ssh` as a third argument to push over SSH):
+Staging URL until the custom domain resolves: **https://ahmedelius.github.io/eliuswiki/**
 
-   ```bash
-   cd ~/eliuswiki
-   git remote add origin https://github.com/<your-username>/eliuswiki.git
-   git push -u origin main
-   ```
+GitHub has already read the committed `CNAME` file and set `elius.wiki` as the custom domain, and it uses `404.html` as the custom 404 page. To make the domain actually serve:
 
-3. In the repository, go to **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The workflow runs on the next push (or use **Run workflow**).
-4. Still in **Pages**, add the custom domain `elius.wiki` under **Custom domain**, then tick **Enforce HTTPS** once DNS resolves.
-5. At your registrar, point the apex domain at GitHub with these A records:
+1. Buy/control `elius.wiki` and point the apex at GitHub with these A records:
 
    ```text
    185.199.108.153
@@ -103,9 +96,22 @@ The repo already contains a workflow at `.github/workflows/deploy.yml`, so a pus
    185.199.111.153
    ```
 
-   Optional: add `CNAME  www  <your-username>.github.io` for the `www` subdomain.
+   Optional: add `CNAME  www  ahmedelius.github.io` for the `www` subdomain.
 
-The committed `CNAME` file already declares `elius.wiki`; adding the domain in the Pages settings just makes GitHub wire up the certificate and redirects. `.nojekyll` is included for the alternative **Deploy from a branch → main / root** method if you prefer that instead of Actions.
+2. Once DNS resolves, open **Settings → Pages** and tick **Enforce HTTPS**.
+
+To publish a local change:
+
+```bash
+cd ~/eliuswiki
+git add -A
+git commit -m "Describe the change"
+git push
+```
+
+GitHub Pages uses branch deployment rather than an Actions workflow because the authentication token did not include the `workflow` scope. For a static site the result is the same: push to `main`, site updates.
+
+### Other hosts (optional)
 
 ### Cloudflare Pages, Netlify, or Vercel
 
